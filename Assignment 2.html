@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 4px solid #0077b6;
+      object-fit: cover;
+    }
+
+    .profile-info h2 {
+      margin: 0;
+      color: #333;
+    }
+
+    .profile-info p {
+      color: #666;
+    }
+
+    h3 {
+      margin-top: 30px;
+      color: #0077b6;
+      border-bottom: 2px solid #0077b6;
+      padding-bottom: 5px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #333;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #005f86;
+    }
+
+    .error {
+      color: red;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Profile</h1>
+  </header>
+
+  <div class="container">
+    <div class="profile">
+      <img src="C:\Users\Simba Munyaradzi\Desktop\WhatsApp Image 2025-09-07 at 09.40.22_fb139f00.jpg" alt="Profile Picture">
+      <div class="profile-info">
+        <h2>Simbarashe Anesu Munyaradzi</h2>
+        <p>Africa University student and Cybersecurity Enthusiast</p>
+      </div>
+    </div>
+
+    <h3>About Me</h3>
+    <div id="about-section">
+      <p>Hello! I'm Simba, an Africa University student who has a great passion for cybersecurity.</p>
+    </div>
+    <button id="toggleAbout">Hide About Me</button>
+
+    <h3>Contact Me</h3>
+    <form id="contactForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+      <div id="nameError" class="error"></div>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <div id="emailError" class="error"></div>
+
+      <label for="subject">Subject</label>
+      <select id="subject">
+        <option>General Inquiry</option>
+        <option>Work Collaboration</option>
+        <option>Freelance Project</option>
+      </select>
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" placeholder="Write your message here..."></textarea>
+      <div id="messageError" class="error"></div>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <script>
+    // Toggle About Me section
+    const toggleBtn = document.getElementById("toggleAbout");
+    const aboutSection = document.getElementById("about-section");
+
+    toggleBtn.addEventListener("click", () => {
+      aboutSection.classList.toggle("hidden");
+      toggleBtn.textContent = aboutSection.classList.contains("hidden") 
+        ? "Show About Me" 
+        : "Hide About Me";
+    });
+
+    // Form Validation
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      // Name validation
+      const name = document.getElementById("name").value.trim();
+      const nameError = document.getElementById("nameError");
+      if (name === "") {
+        nameError.textContent = "Name is required.";
+        valid = false;
+      } else {
+        nameError.textContent = "";
+      }
+
+      // Email validation
+      const email = document.getElementById("email").value.trim();
+      const emailError = document.getElementById("emailError");
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/;
+      if (email === "") {
+        emailError.textContent = "Email is required.";
+        valid = false;
+      } else if (!email.match(emailPattern)) {
+        emailError.textContent = "Enter a valid email address.";
+        valid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      // Message validation
+      const message = document.getElementById("message").value.trim();
+      const messageError = document.getElementById("messageError");
+      if (message === "") {
+        messageError.textContent = "Message cannot be empty.";
+        valid = false;
+      } else {
+        messageError.textContent = "";
+      }
+
+      // If valid, show success
+      if (valid) {
+        alert("Form submitted successfully!");
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
